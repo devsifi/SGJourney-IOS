@@ -22,10 +22,45 @@ class SplashScreenViewController: UIViewController {
         super.viewDidAppear(animated)
         
         let preferences = NSUserDefaults.standardUserDefaults()
+        let lastUpdated : NSDate? = preferences.objectForKey("last_updated") as? NSDate
+        
+        if(lastUpdated == nil) {
+            process();
+        } else {
+            let nextUpdateDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 7, toDate: lastUpdated!, options: [])
+            let current = NSDate()
+            if(current.earlierDate(nextUpdateDate!).isEqualToDate(nextUpdateDate!)) {
+                process();
+            } else {
+                proceed()
+            }
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func getBusStop(completionHandler: ((busStops: [JSON]) -> Void)) {
+       self.getBusStop(0, busStops: nil, completionHandler: completionHandler)
+    }
+    
+    func proceed() {
+        let preferences = NSUserDefaults.standardUserDefaults()
+        
+        if preferences.objectForKey("token") != nil {
+            self.performSegueWithIdentifier("gotoMain", sender: nil)
+        } else {
+            self.performSegueWithIdentifier("gotoLogin", sender: nil)
+        }
+    }
+    
+    func process() {
+        let preferences = NSUserDefaults.standardUserDefaults()
         
         // Retrieve Data from DataMall API
-        getBusStop({ (busStops) -> Void in
-            
+        self.getBusStop({ (busStops) -> Void in
             var tmp = [AnyObject]()
             
             for busStop in busStops {
@@ -46,26 +81,11 @@ class SplashScreenViewController: UIViewController {
                 preferences.setObject(tmp, forKey: "bus_routes")
                 preferences.setObject(date, forKey: "last_updated")
                 
-                print(date)
-                
-                if preferences.objectForKey("token") != nil {
-                    self.performSegueWithIdentifier("gotoMain", sender: nil)
-                } else {
-                    self.performSegueWithIdentifier("gotoLogin", sender: nil)
-                }
+                self.proceed()
             })
         })
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func getBusStop(completionHandler: ((busStops: [JSON]) -> Void)) {
-       self.getBusStop(0, busStops: nil, completionHandler: completionHandler)
-    }
-    
+
     func getBusStop(skip:Int, busStops:[JSON]?, completionHandler: ((busStops: [JSON]) -> Void)) {
         
         var arr:[JSON]
