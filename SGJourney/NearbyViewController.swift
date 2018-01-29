@@ -15,6 +15,8 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet var nearbyMapView: MKMapView!
     @IBOutlet var nearbyBusStopsTableView: UITableView!
     
+    var nearbyBusStops = [JSON]()
+    
     var locationManager : CLLocationManager = CLLocationManager()
     lazy var busStops : JSON! = {
         let preferences = NSUserDefaults.standardUserDefaults()
@@ -31,29 +33,46 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         nearbyMapView.delegate = self
         nearbyBusStopsTableView.delegate = self
-        
+        nearbyBusStopsTableView.dataSource = self
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         nearbyMapView.removeAnnotations(nearbyMapView.annotations)
         centerMapOnLocation(locations.first!)
         
+        nearbyBusStops.removeAll()
+        
         // Display all nearby bus stops
         for busStop in busStops.array! {
-//            CLLocation.init(latitude: <#T##CLLocationDegrees#>, longitude: <#T##CLLocationDegrees#>)
             let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
             if(locations.first!.distanceFromLocation(location) <= Config.NearbyRadius) {
-                let annotation = BusAnnotation()
-                annotation.pin = "ic_marker_bus.png"
-                annotation.coordinate = location.coordinate
-                annotation.title = busStop["Description"].string!
-                annotation.subtitle = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
-//                annotation.setValue(busStop.string, forKey: "bus_stop")
-                
-                busPinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "bus_pin")
-                nearbyMapView.addAnnotation(busPinAnnotation.annotation!)
+                nearbyBusStops.append(busStop)
             }
         }
+        
+        nearbyBusStops = nearbyBusStops.sort { (busStop, otherBusStop) -> Bool in
+            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
+            let otherLocation = CLLocation(latitude: otherBusStop["Latitude"].doubleValue, longitude: otherBusStop["Longitude"].doubleValue)
+            
+//            print(location.distanceFromLocation(locations[0]),otherLocation.distanceFromLocation(locations[0]))
+            return location.distanceFromLocation(locations[0]) < otherLocation.distanceFromLocation(locations[0])
+        }
+        
+        for busStop in nearbyBusStops {
+            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
+            print(location.distanceFromLocation(locations[0]))
+            
+            let annotation = BusAnnotation()
+            annotation.pin = "ic_marker_bus.png"
+            annotation.coordinate = location.coordinate
+            annotation.title = busStop["Description"].string!
+            annotation.subtitle = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
+
+            busPinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "bus_pin")
+            nearbyMapView.addAnnotation(busPinAnnotation.annotation!)
+        }
+        
+        nearbyBusStopsTableView.reloadData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -66,11 +85,13 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identifier = "Cell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier)
+        let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! BusTableViewCell
+        let busStop = nearbyBusStops[indexPath.row]
         
-        cell?.textLabel?.text = nearbyMapView.annotations[indexPath.row].title!
-        
-        return cell!
+        cell.titleLabel?.text = busStop["Description"].stringValue
+        cell.descriptionLabel?.text = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
+
+        return cell
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {

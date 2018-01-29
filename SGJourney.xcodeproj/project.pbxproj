@@ -16,7 +16,7 @@
 		3F2444D420059971003E8F74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2444D220059971003E8F74 /* LaunchScreen.storyboard */; };
 		3F2444DC20059987003E8F74 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2444DB20059987003E8F74 /* MapKit.framework */; };
 		3F2444DE20059AEE003E8F74 /* NearbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2444DD20059AEE003E8F74 /* NearbyViewController.swift */; };
-		3F2444E120059CFF003E8F74 /* NearbyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2444E020059CFF003E8F74 /* NearbyMapView.swift */; };
+		3F8368B2201E2332006543A6 /* BusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8368B1201E2332006543A6 /* BusTableViewCell.swift */; };
 		3F8DBBF920174FCA0022C1F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBBF820174FCA0022C1F4 /* LoginViewController.swift */; };
 		3F8DBBFB201750BA0022C1F4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBBFA201750BA0022C1F4 /* Config.swift */; };
 		3F8DBBFF20177E4C0022C1F4 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBBFE20177E4C0022C1F4 /* SplashScreenViewController.swift */; };
@@ -35,7 +35,7 @@
 		3F2444D520059971003E8F74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F2444DB20059987003E8F74 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3F2444DD20059AEE003E8F74 /* NearbyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyViewController.swift; sourceTree = "<group>"; };
-		3F2444E020059CFF003E8F74 /* NearbyMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapView.swift; sourceTree = "<group>"; };
+		3F8368B1201E2332006543A6 /* BusTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusTableViewCell.swift; sourceTree = "<group>"; };
 		3F8DBBF820174FCA0022C1F4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3F8DBBFA201750BA0022C1F4 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		3F8DBBFE20177E4C0022C1F4 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
@@ -110,8 +110,8 @@
 		3F2444DF20059CCA003E8F74 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3F2444E020059CFF003E8F74 /* NearbyMapView.swift */,
 				3F081E04201836D60016B70C /* BusAnnotation.swift */,
+				3F8368B1201E2332006543A6 /* BusTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -264,8 +264,8 @@
 				3F8DBBF920174FCA0022C1F4 /* LoginViewController.swift in Sources */,
 				3FE23092200EEBBC002D0D7B /* MoreViewController.swift in Sources */,
 				3F8DBBFF20177E4C0022C1F4 /* SplashScreenViewController.swift in Sources */,
-				3F2444E120059CFF003E8F74 /* NearbyMapView.swift in Sources */,
 				3F8DBBFB201750BA0022C1F4 /* Config.swift in Sources */,
+				3F8368B2201E2332006543A6 /* BusTableViewCell.swift in Sources */,
 				3F2444CC20059971003E8F74 /* ViewController.swift in Sources */,
 				3F2444CA20059971003E8F74 /* AppDelegate.swift in Sources */,
 				3F2444DE20059AEE003E8F74 /* NearbyViewController.swift in Sources */,
