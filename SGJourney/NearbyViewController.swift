@@ -60,7 +60,7 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         for busStop in nearbyBusStops {
             let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
-            print(location.distanceFromLocation(locations[0]))
+//            print(location.distanceFromLocation(locations[0]))
             
             let annotation = BusAnnotation()
             annotation.pin = "ic_marker_bus.png"
@@ -137,5 +137,15 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         // TODO: Throw an alert message that the app requires location services otherwise the view will not function
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showBusStopDetails") {
+            let dest = segue.destinationViewController as! BusStopDetailsViewController
+            let busStop = nearbyBusStops[(nearbyBusStopsTableView.indexPathForSelectedRow?.row)!]
+            dest.busStopTitle = busStop["Description"].stringValue
+            dest.busStopDescription = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
+            dest.busStopCode = busStop["BusStopCode"].stringValue
+        }
     }
 }

@@ -1,15 +1,51 @@
 PODS:
   - Alamofire (2.0.2)
+  - FontAwesomeKit (2.2.1):
+    - FontAwesomeKit/Core (= 2.2.1)
+    - FontAwesomeKit/FontAwesome (= 2.2.1)
+    - FontAwesomeKit/FoundationIcons (= 2.2.1)
+    - FontAwesomeKit/IonIcons (= 2.2.1)
+    - FontAwesomeKit/Material (= 2.2.1)
+    - FontAwesomeKit/Octicons (= 2.2.1)
+    - FontAwesomeKit/Zocial (= 2.2.1)
+  - FontAwesomeKit/Core (2.2.1)
+  - FontAwesomeKit/FontAwesome (2.2.1):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/FoundationIcons (2.2.1):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/IonIcons (2.2.1):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Material (2.2.1):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Octicons (2.2.1):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Zocial (2.2.1):
+    - FontAwesomeKit/Core
+  - SlideMenuControllerSwift (2.0.6)
   - SwiftyJSON (2.4.0)
 
 DEPENDENCIES:
   - Alamofire (~> 2.0)
+  - FontAwesomeKit (~> 2.2.0)
+  - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift2.1`)
   - SwiftyJSON (~> 2.0)
+
+EXTERNAL SOURCES:
+  SlideMenuControllerSwift:
+    :branch: swift2.1
+    :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
+
+CHECKOUT OPTIONS:
+  SlideMenuControllerSwift:
+    :commit: 7b0196dd2a5246049106e5815d2ad896abb83372
+    :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
 
 SPEC CHECKSUMS:
   Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
+  FontAwesomeKit: 3614979b3dbb0ec3f7fac1bd760b91f66c31db67
+  SlideMenuControllerSwift: 143343f05b79aef3e2bb4dc72a1dc373ffa66d6c
   SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
 
-PODFILE CHECKSUM: 60722a74d5f3750400204c0b12a764732ea74d70
+PODFILE CHECKSUM: f1c3a9eea1c72f6cf9829a8b6060c7e72f8d415b
 
 COCOAPODS: 1.4.0

@@ -16,9 +16,14 @@
 		3F2444D420059971003E8F74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2444D220059971003E8F74 /* LaunchScreen.storyboard */; };
 		3F2444DC20059987003E8F74 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2444DB20059987003E8F74 /* MapKit.framework */; };
 		3F2444DE20059AEE003E8F74 /* NearbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2444DD20059AEE003E8F74 /* NearbyViewController.swift */; };
+		3F56E22420204A5100CAECF1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F56E22320204A5100CAECF1 /* Config.swift */; };
+		3F56E22620204DBF00CAECF1 /* BusStopDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F56E22520204DBF00CAECF1 /* BusStopDetailsViewController.swift */; };
+		3F56E22820204E5700CAECF1 /* BusServiceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F56E22720204E5700CAECF1 /* BusServiceCellView.swift */; };
+		3F56E22A20207BA100CAECF1 /* BusStopFavourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F56E22920207BA100CAECF1 /* BusStopFavourites.swift */; };
+		3F56E22C202092F600CAECF1 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F56E22B202092F600CAECF1 /* FavouritesViewController.swift */; };
+		3F56E22E202097E100CAECF1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F56E22D202097E100CAECF1 /* SearchViewController.swift */; };
 		3F8368B2201E2332006543A6 /* BusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8368B1201E2332006543A6 /* BusTableViewCell.swift */; };
 		3F8DBBF920174FCA0022C1F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBBF820174FCA0022C1F4 /* LoginViewController.swift */; };
-		3F8DBBFB201750BA0022C1F4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBBFA201750BA0022C1F4 /* Config.swift */; };
 		3F8DBBFF20177E4C0022C1F4 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBBFE20177E4C0022C1F4 /* SplashScreenViewController.swift */; };
 		3F8DBC01201781F70022C1F4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBC00201781F70022C1F4 /* RegisterViewController.swift */; };
 		3FE23092200EEBBC002D0D7B /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE23091200EEBBC002D0D7B /* MoreViewController.swift */; };
@@ -35,9 +40,14 @@
 		3F2444D520059971003E8F74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F2444DB20059987003E8F74 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3F2444DD20059AEE003E8F74 /* NearbyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyViewController.swift; sourceTree = "<group>"; };
+		3F56E22320204A5100CAECF1 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		3F56E22520204DBF00CAECF1 /* BusStopDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusStopDetailsViewController.swift; sourceTree = "<group>"; };
+		3F56E22720204E5700CAECF1 /* BusServiceCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusServiceCellView.swift; sourceTree = "<group>"; };
+		3F56E22920207BA100CAECF1 /* BusStopFavourites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusStopFavourites.swift; sourceTree = "<group>"; };
+		3F56E22B202092F600CAECF1 /* FavouritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
+		3F56E22D202097E100CAECF1 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		3F8368B1201E2332006543A6 /* BusTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusTableViewCell.swift; sourceTree = "<group>"; };
 		3F8DBBF820174FCA0022C1F4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		3F8DBBFA201750BA0022C1F4 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		3F8DBBFE20177E4C0022C1F4 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		3F8DBC00201781F70022C1F4 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		3FE23091200EEBBC002D0D7B /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +100,7 @@
 		3F2444C820059971003E8F74 /* SGJourney */ = {
 			isa = PBXGroup;
 			children = (
+				3F56E22B202092F600CAECF1 /* FavouritesViewController.swift */,
 				3FE23091200EEBBC002D0D7B /* MoreViewController.swift */,
 				3F8DBBF820174FCA0022C1F4 /* LoginViewController.swift */,
 				3F2444DF20059CCA003E8F74 /* Views */,
@@ -100,9 +111,12 @@
 				3F2444D220059971003E8F74 /* LaunchScreen.storyboard */,
 				3F2444D520059971003E8F74 /* Info.plist */,
 				3F2444DD20059AEE003E8F74 /* NearbyViewController.swift */,
-				3F8DBBFA201750BA0022C1F4 /* Config.swift */,
+				3F56E22320204A5100CAECF1 /* Config.swift */,
 				3F8DBBFE20177E4C0022C1F4 /* SplashScreenViewController.swift */,
 				3F8DBC00201781F70022C1F4 /* RegisterViewController.swift */,
+				3F56E22520204DBF00CAECF1 /* BusStopDetailsViewController.swift */,
+				3F56E22920207BA100CAECF1 /* BusStopFavourites.swift */,
+				3F56E22D202097E100CAECF1 /* SearchViewController.swift */,
 			);
 			path = SGJourney;
 			sourceTree = "<group>";
@@ -112,6 +126,7 @@
 			children = (
 				3F081E04201836D60016B70C /* BusAnnotation.swift */,
 				3F8368B1201E2332006543A6 /* BusTableViewCell.swift */,
+				3F56E22720204E5700CAECF1 /* BusServiceCellView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -225,11 +240,15 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SGJourney/Pods-SGJourney-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FontAwesomeKit/FontAwesomeKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesomeKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlideMenuControllerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,15 +278,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F56E22E202097E100CAECF1 /* SearchViewController.swift in Sources */,
 				3F8DBC01201781F70022C1F4 /* RegisterViewController.swift in Sources */,
+				3F56E22820204E5700CAECF1 /* BusServiceCellView.swift in Sources */,
 				3F081E05201836D60016B70C /* BusAnnotation.swift in Sources */,
+				3F56E22620204DBF00CAECF1 /* BusStopDetailsViewController.swift in Sources */,
+				3F56E22A20207BA100CAECF1 /* BusStopFavourites.swift in Sources */,
 				3F8DBBF920174FCA0022C1F4 /* LoginViewController.swift in Sources */,
 				3FE23092200EEBBC002D0D7B /* MoreViewController.swift in Sources */,
 				3F8DBBFF20177E4C0022C1F4 /* SplashScreenViewController.swift in Sources */,
-				3F8DBBFB201750BA0022C1F4 /* Config.swift in Sources */,
 				3F8368B2201E2332006543A6 /* BusTableViewCell.swift in Sources */,
 				3F2444CC20059971003E8F74 /* ViewController.swift in Sources */,
+				3F56E22420204A5100CAECF1 /* Config.swift in Sources */,
 				3F2444CA20059971003E8F74 /* AppDelegate.swift in Sources */,
+				3F56E22C202092F600CAECF1 /* FavouritesViewController.swift in Sources */,
 				3F2444DE20059AEE003E8F74 /* NearbyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

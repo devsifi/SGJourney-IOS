@@ -21,6 +21,8 @@ class SplashScreenViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+                            
+        
         let preferences = NSUserDefaults.standardUserDefaults()
         let lastUpdated : NSDate? = preferences.objectForKey("last_updated") as? NSDate
         
@@ -32,7 +34,8 @@ class SplashScreenViewController: UIViewController {
             if(current.earlierDate(nextUpdateDate!).isEqualToDate(nextUpdateDate!)) {
                 process();
             } else {
-                proceed()
+                process()
+//                proceed()
             }
         }
     }
@@ -58,9 +61,10 @@ class SplashScreenViewController: UIViewController {
     
     func process() {
         let preferences = NSUserDefaults.standardUserDefaults()
-        
+
         // Retrieve Data from DataMall API
         self.getBusStop({ (busStops) -> Void in
+            self.getBusStop({ (busStops) -> Void in })
             var tmp = [AnyObject]()
             
             for busStop in busStops {
@@ -78,7 +82,7 @@ class SplashScreenViewController: UIViewController {
                 
                 let date = NSDate()
                 
-                preferences.setObject(tmp, forKey: "bus_routes")
+                preferences.setObject(tmp2, forKey: "bus_routes")
                 preferences.setObject(date, forKey: "last_updated")
                 
                 self.proceed()
@@ -128,7 +132,7 @@ class SplashScreenViewController: UIViewController {
         self.getBusRoute(0, busRoutes: nil, completionHandler: completionHandler)
     }
     
-    func getBusRoute(skip:Int, busRoutes:[JSON]?, completionHandler: ((busStops: [JSON]) -> Void)) {
+    func getBusRoute(skip:Int, busRoutes:[JSON]?, completionHandler: ((busRoutes: [JSON]) -> Void)) {
         
         var arr:[JSON]
         
@@ -151,9 +155,10 @@ class SplashScreenViewController: UIViewController {
                     print("SGJourney: Bus Route Count: \(json["value"].count)")
                     
                     if(json["value"].count != 500) {
-                        completionHandler(busStops: arr)
+//                        print(json["value"])
+                        completionHandler(busRoutes: arr)
                     } else {
-                        self.getBusStop(skip + 500, busStops: arr, completionHandler: completionHandler)
+                        self.getBusRoute(skip + 500, busRoutes: arr, completionHandler: completionHandler)
                     }
                 } else {
                     print(result.error)
