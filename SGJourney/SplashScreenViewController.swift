@@ -39,6 +39,9 @@ class SplashScreenViewController: UIViewController {
     }
     
     func process() {
+        
+        Alamofire.request(.GET, Config.SGJourneyAPI2) // Wake server up (Heroku)
+        
         let preferences = NSUserDefaults.standardUserDefaults()
         if let token = preferences.stringForKey("token") {
             let param = [
@@ -54,10 +57,13 @@ class SplashScreenViewController: UIViewController {
                     }
                 }
                 
-                self.proceed()
+                let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 3 * Int64(NSEC_PER_SEC))
+                dispatch_after(time, dispatch_get_main_queue()) {
+                    self.proceed()
+                }
             })
         } else {
-            let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
+            let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 3 * Int64(NSEC_PER_SEC))
             dispatch_after(time, dispatch_get_main_queue()) {
                 self.proceed()
             }

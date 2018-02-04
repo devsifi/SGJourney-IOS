@@ -11,7 +11,8 @@ import SwiftyJSON
 
 class MoreViewController: UIViewController {
 
-    @IBOutlet weak var UserNameLabel: UILabel!
+    @IBOutlet var UserNameLabel: UILabel!
+    @IBOutlet var UserEmailLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class MoreViewController: UIViewController {
         if let userRaw = preference.stringForKey("user") {
             let user = JSON.parse(userRaw)
             UserNameLabel.text = user["name"].stringValue
+            UserEmailLabel.text = user["email"].stringValue
         }
     }
 

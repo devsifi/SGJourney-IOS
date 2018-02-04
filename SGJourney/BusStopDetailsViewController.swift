@@ -9,11 +9,11 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import FontAwesomeKit
 
 class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let ADDED_TO_FAVOURITES = 2
-    let REMOVE_FROM_FAVOURITES = 2
+    let favouriteIcon = FAKFontAwesome.heartIconWithSize(24)
     
     let identifier = "BusServiceCell"
     
@@ -24,6 +24,7 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet var busStopTitleLabel: UILabel!
     @IBOutlet var busStopDescriptionLabel: UILabel!
     @IBOutlet var busStopFavouriteButton: UIButton!
+    @IBOutlet var busStopRefreshButton: UIButton!
     
     @IBOutlet var busServiceTableView: UITableView!
     
@@ -37,12 +38,13 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
         busServiceTableView.delegate = self
         busServiceTableView.dataSource = self
         
-        if(BusStopFavourites.contains(busStopCode)) {
-            busStopFavouriteButton.setTitle("Unfavourite", forState: .Normal)
-        } else {
-            busStopFavouriteButton.setTitle("Favourite", forState: .Normal)
-        }
+//        busStopFavouriteButton.setAttributedTitle(favouriteIcon.attributedString(), forState: .Normal)
+//        busStopFavouriteButton.setTitle(favouriteIcon, forState: .Normal)
+        let refreshButton = FAKFontAwesome.refreshIconWithSize(24)
+        refreshButton.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkGrayColor())
+        busStopRefreshButton.setAttributedTitle(refreshButton.attributedString(), forState: .Normal)
         
+        updateFavouriteButton()
         refresh()
     }
     
@@ -72,6 +74,16 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
         })
     }
     
+    func updateFavouriteButton() {
+        if(BusStopFavourites.contains(busStopCode)) {
+            favouriteIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor())
+            busStopFavouriteButton.setAttributedTitle(favouriteIcon.attributedString(), forState: .Normal)
+        } else {
+            favouriteIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkGrayColor())
+            busStopFavouriteButton.setAttributedTitle(favouriteIcon.attributedString(), forState: .Normal)
+        }
+    }
+    
     @IBAction func onClickRefresh(sender: AnyObject) {
         refresh();
     }
@@ -99,7 +111,8 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
                     let okBtn = UIAlertAction(title: "Close", style: .Default, handler: nil)
                     alert.addAction(okBtn)
                     self.presentViewController(alert, animated: true, completion: nil)
-                    self.busStopFavouriteButton.setTitle("Unfavourite", forState: .Normal)
+                    
+                    self.updateFavouriteButton()
                 }
             });
             
@@ -116,7 +129,7 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
                         let okBtn = UIAlertAction(title: "Close", style: .Default, handler: nil)
                         alert.addAction(okBtn)
                         self.presentViewController(alert, animated: true, completion: nil)
-                        self.busStopFavouriteButton.setTitle("Favourite", forState: .Normal)
+                        self.updateFavouriteButton()
                     }
                 });
             }

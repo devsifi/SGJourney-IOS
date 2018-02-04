@@ -34,7 +34,7 @@ class RegisterViewController: UIViewController {
                         let preferences = NSUserDefaults.standardUserDefaults()
                         
                         preferences.setObject(json["token"].string, forKey: "token")
-                        preferences.setObject(json["user"].string, forKey: "user")
+                        preferences.setObject(json["user"].rawString(), forKey: "user")
                         preferences.synchronize()
                         
                         self.performSegueWithIdentifier("gotoMain", sender: nil)

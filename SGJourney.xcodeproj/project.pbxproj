@@ -26,6 +26,8 @@
 		3F8DBBF920174FCA0022C1F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBBF820174FCA0022C1F4 /* LoginViewController.swift */; };
 		3F8DBBFF20177E4C0022C1F4 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBBFE20177E4C0022C1F4 /* SplashScreenViewController.swift */; };
 		3F8DBC01201781F70022C1F4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBC00201781F70022C1F4 /* RegisterViewController.swift */; };
+		D74D060A2027487A00EC85E3 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74D06092027487A00EC85E3 /* ContactViewController.swift */; };
+		D74D060C20274F7500EC85E3 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74D060B20274F7500EC85E3 /* EditProfileViewController.swift */; };
 		D7F3CD8B20271DC8007C4038 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3CD8A20271DC8007C4038 /* MoreViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		3F8DBC00201781F70022C1F4 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		84BB36B78B43802BE88BEEAD /* Pods-SGJourney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGJourney.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SGJourney/Pods-SGJourney.debug.xcconfig"; sourceTree = "<group>"; };
 		CDDA42F9FD8F33095D5086D4 /* Pods-SGJourney.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGJourney.release.xcconfig"; path = "Pods/Target Support Files/Pods-SGJourney/Pods-SGJourney.release.xcconfig"; sourceTree = "<group>"; };
+		D74D06092027487A00EC85E3 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		D74D060B20274F7500EC85E3 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		D7F3CD8A20271DC8007C4038 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		DC697F3EFEB78DEC36027DBB /* Pods_SGJourney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SGJourney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -117,6 +121,8 @@
 				3F56E22520204DBF00CAECF1 /* BusStopDetailsViewController.swift */,
 				3F56E22920207BA100CAECF1 /* BusStopFavourites.swift */,
 				3F56E22D202097E100CAECF1 /* SearchViewController.swift */,
+				D74D06092027487A00EC85E3 /* ContactViewController.swift */,
+				D74D060B20274F7500EC85E3 /* EditProfileViewController.swift */,
 			);
 			path = SGJourney;
 			sourceTree = "<group>";
@@ -279,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7F3CD8B20271DC8007C4038 /* MoreViewController.swift in Sources */,
+				D74D060A2027487A00EC85E3 /* ContactViewController.swift in Sources */,
 				3F56E22E202097E100CAECF1 /* SearchViewController.swift in Sources */,
 				3F8DBC01201781F70022C1F4 /* RegisterViewController.swift in Sources */,
 				3F56E22820204E5700CAECF1 /* BusServiceCellView.swift in Sources */,
@@ -287,6 +294,7 @@
 				3F56E22A20207BA100CAECF1 /* BusStopFavourites.swift in Sources */,
 				3F8DBBF920174FCA0022C1F4 /* LoginViewController.swift in Sources */,
 				3F8DBBFF20177E4C0022C1F4 /* SplashScreenViewController.swift in Sources */,
+				D74D060C20274F7500EC85E3 /* EditProfileViewController.swift in Sources */,
 				3F8368B2201E2332006543A6 /* BusTableViewCell.swift in Sources */,
 				3F2444CC20059971003E8F74 /* ViewController.swift in Sources */,
 				3F56E22420204A5100CAECF1 /* Config.swift in Sources */,
