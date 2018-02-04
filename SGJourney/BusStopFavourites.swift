@@ -36,6 +36,11 @@ class BusStopFavourites: NSObject {
         
     }
     
+    static func clear() {
+        let preferences = NSUserDefaults.standardUserDefaults()
+        preferences.setObject([String](), forKey: "favourites")
+    }
+    
     static func contains(busStopCode:String) -> Bool {
         return _contains(busStopCode) >= 0
     }

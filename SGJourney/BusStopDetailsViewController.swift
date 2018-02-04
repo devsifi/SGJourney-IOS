@@ -59,13 +59,13 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
             "AccountKey": Config.DataMallAPI.key
         ]
         
-        Alamofire.request(.GET, Config.DataMallAPI.url + "/ltaodataservice/BusArrivalv2?BusStopCode=\(busStopCode)", headers: headers)
+        Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/arrival?id=\(busStopCode)", headers: headers)
             .responseJSON(completionHandler: { (req, resp, result) -> Void in
                 if(result.isSuccess) {
                     let json = JSON(result.value!)
                     
                     self.busServices.removeAll()
-                    self.busServices.appendContentsOf((json["Services"].array)!)
+                    self.busServices.appendContentsOf(json.arrayValue)
                     
                     self.busServiceTableView.reloadData()
                 }
@@ -78,22 +78,48 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
     
     @IBAction func onClickFavourite(sender: AnyObject) {
         BusStopFavourites.addToFavourites(busStopCode)
+        let preferences = NSUserDefaults.standardUserDefaults()
+        let token = preferences.stringForKey("token")
+        let parameters = [
+            "token": token,
+            "busStopCode" : busStopCode
+        ]
         
         if(BusStopFavourites.contains(busStopCode)) {
-            let alert = UIAlertController(title: "Added to favourites", message: "'\(busStopTitle)' has been added to favourites!",preferredStyle: .Alert)
-            let okBtn = UIAlertAction(title: "Close", style: .Default, handler: nil)
-            alert.addAction(okBtn)
-            self.presentViewController(alert, animated: true, completion: nil)
             
-            busStopFavouriteButton.setTitle("Unfavourite", forState: .Normal)
-        } else {
-            let alert = UIAlertController(title: "Removed from favourites", message: "'\(busStopTitle)' has been removed from favourites!",preferredStyle: .Alert)
-            let okBtn = UIAlertAction(title: "Close", style: .Default, handler: nil)
-            alert.addAction(okBtn)
-            self.presentViewController(alert, animated: true, completion: nil)
+            Alamofire.request(.POST, Config.SGJourneyAPI + "/favourites/add", parameters: parameters, encoding: .JSON).responseJSON(completionHandler: { (
+                req, resp, result) -> Void in
+                if(!result.isSuccess || !JSON(result.value!)["success"].boolValue) {
+                    let alert = UIAlertController(title: "Something went wrong", message: "Unable to add '\(self.busStopTitle)' to favourites!",preferredStyle: .Alert)
+                    let okBtn = UIAlertAction(title: "Close", style: .Default, handler: nil)
+                    alert.addAction(okBtn)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Added to favourites", message: "'\(self.busStopTitle)' has been added to favourites!",preferredStyle: .Alert)
+                    let okBtn = UIAlertAction(title: "Close", style: .Default, handler: nil)
+                    alert.addAction(okBtn)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.busStopFavouriteButton.setTitle("Unfavourite", forState: .Normal)
+                }
+            });
             
-            busStopFavouriteButton.setTitle("Favourite", forState: .Normal)
-        }
+            } else {
+                Alamofire.request(.POST, Config.SGJourneyAPI + "/favourites/remove", parameters: parameters, encoding: .JSON).responseJSON(completionHandler: { (
+                req, resp, result) -> Void in
+                    if(!result.isSuccess || !JSON(result.value!)["success"].boolValue) {
+                        let alert = UIAlertController(title: "Something went wrong", message: "Unable to remove '\(self.busStopTitle)' from favourites!",preferredStyle: .Alert)
+                        let okBtn = UIAlertAction(title: "Close", style: .Default, handler: nil)
+                        alert.addAction(okBtn)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    } else {
+                        let alert = UIAlertController(title: "Removed to favourites", message: "'\(self.busStopTitle)' has been removed from favourites!",preferredStyle: .Alert)
+                        let okBtn = UIAlertAction(title: "Close", style: .Default, handler: nil)
+                        alert.addAction(okBtn)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        self.busStopFavouriteButton.setTitle("Favourite", forState: .Normal)
+                    }
+                });
+            }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

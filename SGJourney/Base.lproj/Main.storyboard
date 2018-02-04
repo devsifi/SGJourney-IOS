@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F2511" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CB6-wF-wh0">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="17D47" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CB6-wF-wh0">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -179,12 +179,12 @@
                     <connections>
                         <outlet property="emailTextField" destination="b5i-7a-Cfv" id="a0Y-cU-XRN"/>
                         <outlet property="passwordTextField" destination="txy-tM-IKS" id="VKm-Ff-1zo"/>
-                        <segue destination="9qQ-1m-ZGl" kind="show" identifier="login" id="EEG-zw-3Ih"/>
+                        <segue destination="CB6-wF-wh0" kind="showDetail" identifier="processLogin" id="3hs-hY-OMS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xVO-wW-khG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1081" y="1294"/>
+            <point key="canvasLocation" x="969" y="2050"/>
         </scene>
         <!--Tab Bar Controller Scene-->
         <scene sceneID="Ybs-X6-uzC">
@@ -282,7 +282,7 @@
                             <constraint firstItem="5tE-7E-Y4d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ymv-2K-TBD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Nearby" id="6eb-MU-UTy"/>
+                    <tabBarItem key="tabBarItem" title="Nearby" selectedImage="ic_marker_bus" id="6eb-MU-UTy"/>
                     <navigationItem key="navigationItem" id="miU-Vz-R0v"/>
                     <connections>
                         <outlet property="nearbyBusStopsTableView" destination="5tE-7E-Y4d" id="e8y-Bd-ZGg"/>
@@ -603,11 +603,63 @@
                     <view key="view" contentMode="scaleToFill" id="hah-Yr-fVQ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h48-Jx-g1y" userLabel="ProfileDetailsSV">
+                                <rect key="frame" x="265" y="294" width="71" height="42"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2CJ-aa-wVG">
+                                        <rect key="frame" x="0.0" y="0.0" width="71" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkF-IY-IiD">
+                                        <rect key="frame" x="17" y="21" width="37" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_marker_bus" translatesAutoresizingMaskIntoConstraints="NO" id="6zi-F9-37V">
+                                <rect key="frame" x="200" y="84" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="M2T-dr-zIp"/>
+                                    <constraint firstAttribute="width" secondItem="6zi-F9-37V" secondAttribute="height" multiplier="1:1" id="aDq-Cc-4b1"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="d2e-LC-XRU" userLabel="ProfileActionSV">
+                                <rect key="frame" x="20" y="356" width="560" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sW1-82-ETm">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
+                                        <state key="normal" title="Edit Profile"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ee4-lu-70m">
+                                        <rect key="frame" x="0.0" y="34" width="560" height="30"/>
+                                        <state key="normal" title="Logout"/>
+                                        <connections>
+                                            <action selector="onClickLogout:" destination="un8-ir-VsZ" eventType="touchUpInside" id="mlZ-lG-w7z"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="h48-Jx-g1y" firstAttribute="top" secondItem="6zi-F9-37V" secondAttribute="bottom" constant="10" id="CrA-9y-4eD"/>
+                            <constraint firstItem="d2e-LC-XRU" firstAttribute="leading" secondItem="hah-Yr-fVQ" secondAttribute="leadingMargin" id="P0Y-sO-0ar"/>
+                            <constraint firstItem="d2e-LC-XRU" firstAttribute="top" secondItem="h48-Jx-g1y" secondAttribute="bottom" constant="20" id="T8Y-KS-rvQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="d2e-LC-XRU" secondAttribute="trailing" id="X1Y-iv-mqR"/>
+                            <constraint firstItem="6zi-F9-37V" firstAttribute="centerX" secondItem="hah-Yr-fVQ" secondAttribute="centerX" id="Xb7-SZ-9UO"/>
+                            <constraint firstItem="6zi-F9-37V" firstAttribute="top" secondItem="ZZZ-kO-KYe" secondAttribute="bottom" constant="20" id="Xgn-q4-ll3"/>
+                            <constraint firstItem="h48-Jx-g1y" firstAttribute="centerX" secondItem="hah-Yr-fVQ" secondAttribute="centerX" id="lmA-ag-Na2"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="more" id="b2H-kk-WCH"/>
                     <connections>
-                        <segue destination="CjS-q8-uhT" kind="show" identifier="showContactView" id="wij-ac-39l"/>
+                        <outlet property="UserNameLabel" destination="HkF-IY-IiD" id="NPq-BK-h03"/>
+                        <segue destination="CB6-wF-wh0" kind="showDetail" identifier="login" id="AWP-cf-yGT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwR-Xg-e5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -787,7 +839,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0lp-fF-bVZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="519" y="1978"/>
+            <point key="canvasLocation" x="-205" y="2214"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Iux-fT-ldA">
@@ -805,14 +857,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVQ-Dz-ZJr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="293" y="1132"/>
+            <point key="canvasLocation" x="125" y="1360"/>
         </scene>
     </scenes>
     <resources>
         <image name="ic_marker_bus" width="400" height="401"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="y2H-fk-N8Y"/>
         <segue reference="tQ0-if-Wvf"/>
-        <segue reference="iap-rc-y7m"/>
+        <segue reference="3hs-hY-OMS"/>
     </inferredMetricsTieBreakers>
 </document>

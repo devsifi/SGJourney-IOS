@@ -8,34 +8,36 @@
 
 import UIKit
 import SwiftyJSON
+import Alamofire
 
 class FavouritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var favouritesTableView: UITableView!
     
     var favouriteBusStops = [JSON]()
-    var busStops : JSON! = {
-        let preferences = NSUserDefaults.standardUserDefaults()
-        return JSON(preferences.valueForKey("bus_stops")!)
-    }()
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        favouriteBusStops.removeAll()
-        
-        let favourites = BusStopFavourites.getFavourites()
-        for busStop in busStops.array! {
-            for favourite in favourites {
-                if(busStop["BusStopCode"].stringValue == favourite) {
-                    favouriteBusStops.append(busStop)
-                }
-            }
-        }
-        
         favouritesTableView.delegate = self
         favouritesTableView.dataSource = self
-        favouritesTableView.reloadData()
+        
+        Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/stops").responseJSON { (req, resp, result) -> Void in
+            if(result.isSuccess) {
+                let json = JSON(result.value!).arrayValue
+                self.favouriteBusStops.removeAll()
+                let favourites = BusStopFavourites.getFavourites()
+                for busStop in json {
+                    for favourite in favourites {
+                        if(busStop["BusStopCode"].stringValue == favourite) {
+                            self.favouriteBusStops.append(busStop)
+                        }
+
+                    }
+                }
+                
+                self.favouritesTableView.reloadData()
+            }
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

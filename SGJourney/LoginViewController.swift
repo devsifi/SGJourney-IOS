@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func onClickLogin(sender: AnyObject) {
         
-        let param: [String: AnyObject] = [
+        var param: [String: AnyObject] = [
             "email": emailTextField.text!,
             "password": passwordTextField.text!
         ]
@@ -40,11 +40,27 @@ class LoginViewController: UIViewController {
                     if json["success"] == true {
                         let preferences = NSUserDefaults.standardUserDefaults()
                     
-                        preferences.setObject(json["token"].string, forKey: "token")
-                        preferences.setObject(json["user"].string, forKey: "user")
+//                        print(json["user"])
+                        
+                        preferences.setObject(json["token"].stringValue, forKey: "token")
+                        preferences.setObject(json["user"].rawString(), forKey: "user")
                         preferences.synchronize()
-                    
-                        self.performSegueWithIdentifier("login", sender: nil)
+                        
+                        param = [
+                            "token": json["token"].stringValue
+                        ]
+                        
+                        Alamofire.request(.POST, Config.SGJourneyAPI + "/favourites/get", parameters: param, encoding: .JSON).responseJSON(completionHandler: { (req2, resp2, result2) -> Void in
+                            if(result.isSuccess) {
+                                BusStopFavourites.clear()
+                                let favourites = JSON(result2.value!).arrayValue
+                                for favourite in favourites {
+                                    BusStopFavourites.addToFavourites(favourite["bus_stop_code"].stringValue)
+                                }
+                            }
+                            
+                            self.performSegueWithIdentifier("processLogin", sender: nil)
+                        })
                     } else {
                         let alert = UIAlertController(title: "Login Failed", message: json["messages"][0].string, preferredStyle: .Alert)
                         let okButton = UIAlertAction(title: "Ok", style: .Default, handler: nil)

@@ -16,37 +16,16 @@ class SplashScreenViewController: UIViewController {
         print("Launching SGJourney")
         
         // Do any additional setup after loading the view.
+        process()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-                            
-        
-        let preferences = NSUserDefaults.standardUserDefaults()
-        let lastUpdated : NSDate? = preferences.objectForKey("last_updated") as? NSDate
-        
-        if(lastUpdated == nil) {
-            process();
-        } else {
-            let nextUpdateDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 7, toDate: lastUpdated!, options: [])
-            let current = NSDate()
-            if(current.earlierDate(nextUpdateDate!).isEqualToDate(nextUpdateDate!)) {
-                process();
-            } else {
-                process()
-//                proceed()
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func getBusStop(completionHandler: ((busStops: [JSON]) -> Void)) {
-       self.getBusStop(0, busStops: nil, completionHandler: completionHandler)
     }
     
     func proceed() {
@@ -61,8 +40,32 @@ class SplashScreenViewController: UIViewController {
     
     func process() {
         let preferences = NSUserDefaults.standardUserDefaults()
-
+        if let token = preferences.stringForKey("token") {
+            let param = [
+                "token": token
+            ]
+        
+            Alamofire.request(.POST, Config.SGJourneyAPI + "/favourites/get", parameters: param, encoding: .JSON).responseJSON(completionHandler: { (req, resp, result) -> Void in
+                if(result.isSuccess) {
+                    BusStopFavourites.clear()
+                    let favourites = JSON(result.value!)["favourites"].arrayValue
+                    for favourite in favourites {
+                        BusStopFavourites.addToFavourites(favourite["bus_stop_code"].stringValue)
+                    }
+                }
+                
+                self.proceed()
+            })
+        } else {
+            let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 2 * Int64(NSEC_PER_SEC))
+            dispatch_after(time, dispatch_get_main_queue()) {
+                self.proceed()
+            }
+        }
+        
         // Retrieve Data from DataMall API
+        /*
+        let preferences = NSUserDefaults.standardUserDefaults()
         self.getBusStop({ (busStops) -> Void in
             self.getBusStop({ (busStops) -> Void in })
             var tmp = [AnyObject]()
@@ -88,8 +91,14 @@ class SplashScreenViewController: UIViewController {
                 self.proceed()
             })
         })
+        */
     }
 
+    /*
+    func getBusStop(completionHandler: ((busStops: [JSON]) -> Void)) {
+        self.getBusStop(0, busStops: nil, completionHandler: completionHandler)
+    }
+    
     func getBusStop(skip:Int, busStops:[JSON]?, completionHandler: ((busStops: [JSON]) -> Void)) {
         
         var arr:[JSON]
@@ -170,4 +179,5 @@ class SplashScreenViewController: UIViewController {
                 }
             })
     }
+    */
 }

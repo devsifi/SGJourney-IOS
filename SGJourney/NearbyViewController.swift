@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Alamofire
 import SwiftyJSON
 
 class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -18,10 +19,6 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var nearbyBusStops = [JSON]()
     
     var locationManager : CLLocationManager = CLLocationManager()
-    lazy var busStops : JSON! = {
-        let preferences = NSUserDefaults.standardUserDefaults()
-        return JSON(preferences.valueForKey("bus_stops")!)
-    }()
     
     var busPinAnnotation : MKPinAnnotationView!
     
@@ -40,39 +37,66 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         nearbyMapView.removeAnnotations(nearbyMapView.annotations)
         centerMapOnLocation(locations.first!)
         
-        nearbyBusStops.removeAll()
+        let parameters = [
+            "latitude" : String(locations.first!.coordinate.latitude.description),
+            "longitude" : String(locations.first!.coordinate.longitude.description),
+        ]
         
-        // Display all nearby bus stops
-        for busStop in busStops.array! {
-            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
-            if(locations.first!.distanceFromLocation(location) <= Config.NearbyRadius) {
-                nearbyBusStops.append(busStop)
+        Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/nearby", parameters: parameters).responseJSON(completionHandler: { (req, resp, result) -> Void in
+            self.nearbyBusStops.removeAll()
+            if(result.isSuccess) {
+                let json = JSON(result.value!)
+                for busStop in json.arrayValue {
+                    self.nearbyBusStops.append(busStop)
+                    let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
+                    //            print(location.distanceFromLocation(locations[0]))
+                    
+                    let annotation = BusAnnotation()
+                    annotation.pin = "ic_marker_bus.png"
+                    annotation.coordinate = location.coordinate
+                    annotation.title = busStop["Description"].string!
+                    annotation.subtitle = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
+                    
+                    self.busPinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "bus_pin")
+                    self.nearbyMapView.addAnnotation(self.busPinAnnotation.annotation!)
+                }
+                
+                self.nearbyBusStopsTableView.reloadData()
             }
-        }
+        })
+//        Alamofire.request(.GET, Config.SGJournetAPI2 + "/bus/nearby?Longitude\(locations.first?.coordinate.longitude!)&Latitude\(locations.first?.coordinate.latitude!)")
+//            .responseJSON
+        // Display all nearby bus stops
+//        for busStop in busStops.array! {
+//            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
+//            if(locations.first!.distanceFromLocation(location) <= Config.NearbyRadius) {
+//                nearbyBusStops.append(busStop)
+//            }
+//        }
+//        
+//        nearbyBusStops = nearbyBusStops.sort { (busStop, otherBusStop) -> Bool in
+//            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
+//            let otherLocation = CLLocation(latitude: otherBusStop["Latitude"].doubleValue, longitude: otherBusStop["Longitude"].doubleValue)
+//            
+////            print(location.distanceFromLocation(locations[0]),otherLocation.distanceFromLocation(locations[0]))
+//            return location.distanceFromLocation(locations[0]) < otherLocation.distanceFromLocation(locations[0])
+//        }
         
-        nearbyBusStops = nearbyBusStops.sort { (busStop, otherBusStop) -> Bool in
-            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
-            let otherLocation = CLLocation(latitude: otherBusStop["Latitude"].doubleValue, longitude: otherBusStop["Longitude"].doubleValue)
-            
-//            print(location.distanceFromLocation(locations[0]),otherLocation.distanceFromLocation(locations[0]))
-            return location.distanceFromLocation(locations[0]) < otherLocation.distanceFromLocation(locations[0])
-        }
-        
-        for busStop in nearbyBusStops {
-            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
-//            print(location.distanceFromLocation(locations[0]))
-            
-            let annotation = BusAnnotation()
-            annotation.pin = "ic_marker_bus.png"
-            annotation.coordinate = location.coordinate
-            annotation.title = busStop["Description"].string!
-            annotation.subtitle = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
-
-            busPinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "bus_pin")
-            nearbyMapView.addAnnotation(busPinAnnotation.annotation!)
-        }
-        
-        nearbyBusStopsTableView.reloadData()
+//        for busStop in nearbyBusStops {
+//            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
+////            print(location.distanceFromLocation(locations[0]))
+//            
+//            let annotation = BusAnnotation()
+//            annotation.pin = "ic_marker_bus.png"
+//            annotation.coordinate = location.coordinate
+//            annotation.title = busStop["Description"].string!
+//            annotation.subtitle = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
+//
+//            busPinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "bus_pin")
+//            nearbyMapView.addAnnotation(busPinAnnotation.annotation!)
+//        }
+//        
+//        nearbyBusStopsTableView.reloadData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -80,7 +104,7 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nearbyMapView.annotations.count
+        return nearbyBusStops.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

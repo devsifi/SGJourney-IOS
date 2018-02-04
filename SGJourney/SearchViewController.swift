@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Alamofire
 
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -16,43 +17,53 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var searchTableView: UITableView!
     
     var searchResults = [JSON]()
-    var busStops : JSON! = {
-        let preferences = NSUserDefaults.standardUserDefaults()
-        return JSON(preferences.valueForKey("bus_stops")!)
-    }()
-    var busRoutes : JSON! = {
-        let preferences = NSUserDefaults.standardUserDefaults()
-        return JSON(preferences.valueForKey("bus_routes")!)
-    }()
+//    var busStops : JSON! = {
+//        let preferences = NSUserDefaults.standardUserDefaults()
+//        return JSON(preferences.valueForKey("bus_stops")!)
+//    }()
+//    var busRoutes : JSON! = {
+//        let preferences = NSUserDefaults.standardUserDefaults()
+//        return JSON(preferences.valueForKey("bus_routes")!)
+//    }()
     
     @IBAction func onClickSearch(sender: AnyObject) {
         if let query = searchTextField.text?.lowercaseString {
             searchResults.removeAll()
             
-            for busStop in busStops.array! {
-                if(busStop["BusStopCode"].stringValue == query) {
-                    searchResults.append(busStop)
-                } else if (busStop["RoadName"].stringValue.lowercaseString.containsString(query)){
-                    searchResults.append(busStop)
-                } else if (busStop["Description"].stringValue.lowercaseString.containsString(query)){
-                    searchResults.append(busStop)
-                }
-            }
+            let parameters = [
+                "search" : query
+            ]
             
-//            print(busRoutes.rawString())
-            for busRoute in busRoutes.array! {
-                print("Service No: \(busRoute["ServiceNo"].stringValue), Query: \(query)")
-                if(busRoute["ServiceNo"].stringValue == query) {
-                    for busStop in busStops.array! {
-                        if(busStop["BusStopCode"].stringValue == busRoute["BusStopCode"].stringValue) {
-                            searchResults.append(busStop)
-                            break
-                        }
-                    }
+            Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/stops", parameters: parameters).responseJSON(completionHandler: { (req, resp, results) -> Void in
+                if(results.isSuccess) {
+                    let json = JSON(results.value!).arrayValue
+                    self.searchResults.appendContentsOf(json)
                 }
-            }
+                self.searchTableView.reloadData()
+            })
             
-            searchTableView.reloadData()
+//            for busStop in busStops.array! {
+//                if(busStop["BusStopCode"].stringValue == query) {
+//                    searchResults.append(busStop)
+//                } else if (busStop["RoadName"].stringValue.lowercaseString.containsString(query)){
+//                    searchResults.append(busStop)
+//                } else if (busStop["Description"].stringValue.lowercaseString.containsString(query)){
+//                    searchResults.append(busStop)
+//                }
+//            }
+//            
+////            print(busRoutes.rawString())
+//            for busRoute in busRoutes.array! {
+//                print("Service No: \(busRoute["ServiceNo"].stringValue), Query: \(query)")
+//                if(busRoute["ServiceNo"].stringValue == query) {
+//                    for busStop in busStops.array! {
+//                        if(busStop["BusStopCode"].stringValue == busRoute["BusStopCode"].stringValue) {
+//                            searchResults.append(busStop)
+//                            break
+//                        }
+//                    }
+//                }
+//            }
         }
     }
     
