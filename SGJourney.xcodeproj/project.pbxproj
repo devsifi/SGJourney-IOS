@@ -28,6 +28,7 @@
 		3F8DBC01201781F70022C1F4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8DBC00201781F70022C1F4 /* RegisterViewController.swift */; };
 		D74D060A2027487A00EC85E3 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74D06092027487A00EC85E3 /* ContactViewController.swift */; };
 		D74D060C20274F7500EC85E3 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74D060B20274F7500EC85E3 /* EditProfileViewController.swift */; };
+		D77D4D2920289B9E007B128A /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77D4D2820289B9E007B128A /* ColorExtension.swift */; };
 		D7F3CD8B20271DC8007C4038 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3CD8A20271DC8007C4038 /* MoreViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		CDDA42F9FD8F33095D5086D4 /* Pods-SGJourney.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGJourney.release.xcconfig"; path = "Pods/Target Support Files/Pods-SGJourney/Pods-SGJourney.release.xcconfig"; sourceTree = "<group>"; };
 		D74D06092027487A00EC85E3 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		D74D060B20274F7500EC85E3 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		D77D4D2820289B9E007B128A /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		D7F3CD8A20271DC8007C4038 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		DC697F3EFEB78DEC36027DBB /* Pods_SGJourney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SGJourney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 				3F56E22D202097E100CAECF1 /* SearchViewController.swift */,
 				D74D06092027487A00EC85E3 /* ContactViewController.swift */,
 				D74D060B20274F7500EC85E3 /* EditProfileViewController.swift */,
+				D77D4D2820289B9E007B128A /* ColorExtension.swift */,
 			);
 			path = SGJourney;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				D7F3CD8B20271DC8007C4038 /* MoreViewController.swift in Sources */,
 				D74D060A2027487A00EC85E3 /* ContactViewController.swift in Sources */,
 				3F56E22E202097E100CAECF1 /* SearchViewController.swift in Sources */,
+				D77D4D2920289B9E007B128A /* ColorExtension.swift in Sources */,
 				3F8DBC01201781F70022C1F4 /* RegisterViewController.swift in Sources */,
 				3F56E22820204E5700CAECF1 /* BusServiceCellView.swift in Sources */,
 				3F081E05201836D60016B70C /* BusAnnotation.swift in Sources */,

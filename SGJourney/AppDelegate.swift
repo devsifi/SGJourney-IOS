@@ -1,4 +1,4 @@
-//
+	//
 //  AppDelegate.swift
 //  SGJourney
 //
@@ -13,9 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        UITabBar.appearance().backgroundColor = UIColor(hex:"#C8D6AF")
+        UITabBar.appearance().tintColor = UIColor.darkGrayColor()
+        
+         UINavigationBar.appearance().tintColor = UIColor.darkGrayColor()
+        
         return true
     }
 

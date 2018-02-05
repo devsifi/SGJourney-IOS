@@ -21,6 +21,14 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         favouritesTableView.delegate = self
         favouritesTableView.dataSource = self
         
+        reload()
+    }
+    
+    @IBAction func onClickFavourite(sender: AnyObject) {
+        reload()
+    }
+    
+    func reload() {
         Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/stops").responseJSON { (req, resp, result) -> Void in
             if(result.isSuccess) {
                 let json = JSON(result.value!).arrayValue
@@ -31,7 +39,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
                         if(busStop["BusStopCode"].stringValue == favourite) {
                             self.favouriteBusStops.append(busStop)
                         }
-
+                        
                     }
                 }
                 
@@ -52,9 +60,15 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! BusTableViewCell
         let busStop = favouriteBusStops[indexPath.row]
         
-        cell.titleLabel?.text = busStop["Description"].stringValue
-        cell.descriptionLabel?.text = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
+        cell.viewController = self
         
+        cell.busStopCode = busStop["BusStopCode"].stringValue
+        cell.busStopTitle = busStop["Description"].stringValue
+        cell.busStopDescription = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].stringValue))"
+        
+        cell.titleLabel?.text = cell.busStopTitle
+        cell.descriptionLabel?.text = cell.busStopDescription
+        cell.update()
         return cell
     }
     

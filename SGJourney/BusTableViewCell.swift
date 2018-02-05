@@ -79,9 +79,9 @@ class BusTableViewCell: UITableViewCell {
     
     func update() {
         if(BusStopFavourites.contains(busStopCode!)) {
-            icon.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor())
+            icon.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex:"#BC6873"))
         } else {
-            icon.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkTextColor())
+            icon.addAttribute(NSForegroundColorAttributeName, value: UIColor.lightGrayColor())
         }
         
         favouriteButton.setAttributedTitle(icon.attributedString(), forState: .Normal)

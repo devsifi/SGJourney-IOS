@@ -38,8 +38,6 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
         busServiceTableView.delegate = self
         busServiceTableView.dataSource = self
         
-//        busStopFavouriteButton.setAttributedTitle(favouriteIcon.attributedString(), forState: .Normal)
-//        busStopFavouriteButton.setTitle(favouriteIcon, forState: .Normal)
         let refreshButton = FAKFontAwesome.refreshIconWithSize(24)
         refreshButton.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkGrayColor())
         busStopRefreshButton.setAttributedTitle(refreshButton.attributedString(), forState: .Normal)
@@ -76,10 +74,10 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
     
     func updateFavouriteButton() {
         if(BusStopFavourites.contains(busStopCode)) {
-            favouriteIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor())
+            favouriteIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "#BC6873"))
             busStopFavouriteButton.setAttributedTitle(favouriteIcon.attributedString(), forState: .Normal)
         } else {
-            favouriteIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkGrayColor())
+            favouriteIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.lightGrayColor())
             busStopFavouriteButton.setAttributedTitle(favouriteIcon.attributedString(), forState: .Normal)
         }
     }
@@ -149,11 +147,13 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! BusServiceCellView
         let service = busServices[indexPath.row]
         
-        print(service.rawString()!)
+        let busArrival1 = service["NextBus"]
+        let busArrival2 = service["NextBus2"]
+        let busArrival3 = service["NextBus3"]
         
-        let busArrivalETA1 = service["NextBus"]["EstimatedArrival"].stringValue
-        let busArrivalETA2 = service["NextBus2"]["EstimatedArrival"].stringValue
-        let busArrivalETA3 = service["NextBus3"]["EstimatedArrival"].stringValue
+        let busArrivalETA1 = busArrival1["EstimatedArrival"].stringValue
+        let busArrivalETA2 = busArrival2["EstimatedArrival"].stringValue
+        let busArrivalETA3 = busArrival3["EstimatedArrival"].stringValue
         
         let dateFomatter = NSDateFormatter()
         dateFomatter.timeZone = NSTimeZone(name: "UTC")
@@ -163,6 +163,10 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
         cell.busETA1?.text = getBusArrivalTime(dateFomatter.dateFromString(busArrivalETA1))
         cell.busETA2?.text = getBusArrivalTime(dateFomatter.dateFromString(busArrivalETA2))
         cell.busETA3?.text = getBusArrivalTime(dateFomatter.dateFromString(busArrivalETA3))
+        
+        cell.busETA1?.textColor = getLoadColor(busArrival1["Load"].stringValue)
+        cell.busETA2?.textColor = getLoadColor(busArrival2["Load"].stringValue)
+        cell.busETA3?.textColor = getLoadColor(busArrival3["Load"].stringValue)
         
         return cell
     }
@@ -177,6 +181,24 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
             }
         } else {
             return ""
+        }
+    }
+    
+    func getLoadColor(load:String) -> UIColor {
+        
+        let full = UIColor(hex: "#6E2A33")
+        let limited = UIColor(hex: "#C7AB87")
+        let empty = UIColor(hex: "#6E7560")
+        
+        switch (load) {
+        case "SDA":
+            return limited
+            case "LSD":
+                return full
+        case "SEA":
+            return empty
+        default:
+            return empty
         }
     }
 }

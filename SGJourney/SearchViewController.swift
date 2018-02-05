@@ -17,14 +17,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var searchTableView: UITableView!
     
     var searchResults = [JSON]()
-//    var busStops : JSON! = {
-//        let preferences = NSUserDefaults.standardUserDefaults()
-//        return JSON(preferences.valueForKey("bus_stops")!)
-//    }()
-//    var busRoutes : JSON! = {
-//        let preferences = NSUserDefaults.standardUserDefaults()
-//        return JSON(preferences.valueForKey("bus_routes")!)
-//    }()
     
     @IBAction func onClickSearch(sender: AnyObject) {
         if let query = searchTextField.text?.lowercaseString {
@@ -41,39 +33,16 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 }
                 self.searchTableView.reloadData()
             })
-            
-//            for busStop in busStops.array! {
-//                if(busStop["BusStopCode"].stringValue == query) {
-//                    searchResults.append(busStop)
-//                } else if (busStop["RoadName"].stringValue.lowercaseString.containsString(query)){
-//                    searchResults.append(busStop)
-//                } else if (busStop["Description"].stringValue.lowercaseString.containsString(query)){
-//                    searchResults.append(busStop)
-//                }
-//            }
-//            
-////            print(busRoutes.rawString())
-//            for busRoute in busRoutes.array! {
-//                print("Service No: \(busRoute["ServiceNo"].stringValue), Query: \(query)")
-//                if(busRoute["ServiceNo"].stringValue == query) {
-//                    for busStop in busStops.array! {
-//                        if(busStop["BusStopCode"].stringValue == busRoute["BusStopCode"].stringValue) {
-//                            searchResults.append(busStop)
-//                            break
-//                        }
-//                    }
-//                }
-//            }
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-//        searchResults.removeAll()
         searchTableView.delegate = self
         searchTableView.dataSource = self
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -91,9 +60,15 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! BusTableViewCell
         let busStop = searchResults[indexPath.row]
         
-        cell.titleLabel?.text = busStop["Description"].stringValue
-        cell.descriptionLabel?.text = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
+        cell.viewController = self
         
+        cell.busStopCode = busStop["BusStopCode"].stringValue
+        cell.busStopTitle = busStop["Description"].stringValue
+        cell.busStopDescription = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].stringValue))"
+        
+        cell.titleLabel?.text = cell.busStopTitle
+        cell.descriptionLabel?.text = cell.busStopDescription
+        cell.update()
         return cell
     }
     

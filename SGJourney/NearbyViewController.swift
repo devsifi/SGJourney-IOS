@@ -10,16 +10,16 @@ import UIKit
 import MapKit
 import Alamofire
 import SwiftyJSON
+import FontAwesomeKit
 
 class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet var mapRefreshButton: UIButton!
     @IBOutlet var nearbyMapView: MKMapView!
     @IBOutlet var nearbyBusStopsTableView: UITableView!
     
     var nearbyBusStops = [JSON]()
-    
     var locationManager : CLLocationManager = CLLocationManager()
-    
     var busPinAnnotation : MKPinAnnotationView!
     
     override func viewDidLoad() {
@@ -31,6 +31,23 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         nearbyMapView.delegate = self
         nearbyBusStopsTableView.delegate = self
         nearbyBusStopsTableView.dataSource = self
+        
+        let refreshIcon = FAKFontAwesome.refreshIconWithSize(24)
+        refreshIcon.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkGrayColor())
+        mapRefreshButton.setAttributedTitle(refreshIcon.attributedString(), forState: .Normal)
+    }
+    
+    @IBAction func onClickMapRefresh(sender: AnyObject) {
+        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+            let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+            rotation.toValue = M_PI * 2
+            rotation.duration = 0.66
+            rotation.cumulative = true
+            rotation.repeatCount = 2
+            self.mapRefreshButton.layer.addAnimation(rotation, forKey: "rotateAnimation")
+            }) { (bool) -> Void in
+                self.locationManager.requestLocation()
+        }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -64,39 +81,6 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 self.nearbyBusStopsTableView.reloadData()
             }
         })
-//        Alamofire.request(.GET, Config.SGJournetAPI2 + "/bus/nearby?Longitude\(locations.first?.coordinate.longitude!)&Latitude\(locations.first?.coordinate.latitude!)")
-//            .responseJSON
-        // Display all nearby bus stops
-//        for busStop in busStops.array! {
-//            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
-//            if(locations.first!.distanceFromLocation(location) <= Config.NearbyRadius) {
-//                nearbyBusStops.append(busStop)
-//            }
-//        }
-//        
-//        nearbyBusStops = nearbyBusStops.sort { (busStop, otherBusStop) -> Bool in
-//            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
-//            let otherLocation = CLLocation(latitude: otherBusStop["Latitude"].doubleValue, longitude: otherBusStop["Longitude"].doubleValue)
-//            
-////            print(location.distanceFromLocation(locations[0]),otherLocation.distanceFromLocation(locations[0]))
-//            return location.distanceFromLocation(locations[0]) < otherLocation.distanceFromLocation(locations[0])
-//        }
-        
-//        for busStop in nearbyBusStops {
-//            let location = CLLocation(latitude: busStop["Latitude"].doubleValue, longitude: busStop["Longitude"].doubleValue)
-////            print(location.distanceFromLocation(locations[0]))
-//            
-//            let annotation = BusAnnotation()
-//            annotation.pin = "ic_marker_bus.png"
-//            annotation.coordinate = location.coordinate
-//            annotation.title = busStop["Description"].string!
-//            annotation.subtitle = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
-//
-//            busPinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "bus_pin")
-//            nearbyMapView.addAnnotation(busPinAnnotation.annotation!)
-//        }
-//        
-//        nearbyBusStopsTableView.reloadData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
