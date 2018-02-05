@@ -85,7 +85,17 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     @IBAction func onClickRefresh(sender: AnyObject) {
-        refresh();
+        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+                let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+                rotation.toValue = M_PI * 2
+                rotation.duration = 0.66
+                rotation.cumulative = true
+                rotation.repeatCount = 2
+                self.busStopRefreshButton.layer.addAnimation(rotation, forKey: "rotateAnimation")
+            }) { (bool) -> Void in
+                self.refresh()
+            }
+//        refresh();
     }
     
     @IBAction func onClickFavourite(sender: AnyObject) {

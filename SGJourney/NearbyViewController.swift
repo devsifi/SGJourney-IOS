@@ -112,9 +112,15 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! BusTableViewCell
         let busStop = nearbyBusStops[indexPath.row]
         
-        cell.titleLabel?.text = busStop["Description"].stringValue
-        cell.descriptionLabel?.text = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].string!))"
-
+        cell.viewController = self
+        
+        cell.busStopCode = busStop["BusStopCode"].stringValue
+        cell.busStopTitle = busStop["Description"].stringValue
+        cell.busStopDescription = "\(busStop["RoadName"].string!) (\(busStop["BusStopCode"].stringValue))"
+        
+        cell.titleLabel?.text = cell.busStopTitle
+        cell.descriptionLabel?.text = cell.busStopDescription
+        cell.update()
         return cell
     }
     

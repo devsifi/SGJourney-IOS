@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="17D47" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CB6-wF-wh0">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F2511" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CB6-wF-wh0">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -256,9 +256,18 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3e-7Q-uER">
+                                                    <rect key="frame" x="542" y="20" width="30" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                    <state key="normal" title="&lt;3">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="OR7-qN-Hyi" firstAttribute="leading" secondItem="hgc-XN-KR6" secondAttribute="leadingMargin" constant="10" id="eE7-Qo-uas"/>
+                                                <constraint firstItem="J3e-7Q-uER" firstAttribute="centerY" secondItem="hgc-XN-KR6" secondAttribute="centerY" id="rJt-mt-BoQ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="J3e-7Q-uER" secondAttribute="trailing" constant="20" id="zYb-Za-2ZD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
@@ -266,6 +275,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="BXV-HB-q3v" id="ZAG-P6-nT8"/>
+                                            <outlet property="favouriteButton" destination="J3e-7Q-uER" id="azE-ff-rcJ"/>
                                             <outlet property="titleLabel" destination="fBa-ag-Igm" id="8Rs-pU-kou"/>
                                             <segue destination="7YQ-lO-BiC" kind="show" identifier="showBusStopDetails" id="y2H-fk-N8Y"/>
                                         </connections>
@@ -483,7 +493,18 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oli-8v-7uf">
+                                                    <rect key="frame" x="542" y="20" width="30" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                    <state key="normal" title="&lt;3">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="oli-8v-7uf" firstAttribute="centerY" secondItem="ELu-nF-WdO" secondAttribute="centerY" id="RFF-3G-541"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="oli-8v-7uf" secondAttribute="trailing" constant="20" id="auD-Vt-6Ld"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
                                             <constraint firstItem="Nwy-I2-qjV" firstAttribute="centerY" secondItem="Kf8-dG-dbf" secondAttribute="centerY" id="2Jt-OW-Pnu"/>
@@ -491,6 +512,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="o62-z2-JZ1" id="dTt-Os-EQj"/>
+                                            <outlet property="favouriteButton" destination="oli-8v-7uf" id="zCV-DG-6tW"/>
                                             <outlet property="titleLabel" destination="EXn-Eo-XfG" id="BO9-0G-d6h"/>
                                             <segue destination="7YQ-lO-BiC" kind="show" identifier="showBusStopDetails" id="iap-rc-y7m"/>
                                         </connections>
@@ -561,9 +583,18 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSb-Z0-yaa">
+                                                    <rect key="frame" x="542" y="20" width="30" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                    <state key="normal" title="&lt;3">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="MSb-Z0-yaa" firstAttribute="centerY" secondItem="i88-u4-cle" secondAttribute="centerY" id="ITS-U9-srC"/>
                                                 <constraint firstItem="5Uh-YJ-rAK" firstAttribute="leading" secondItem="i88-u4-cle" secondAttribute="leading" constant="20" id="WnQ-fA-p8v"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="MSb-Z0-yaa" secondAttribute="trailing" constant="20" id="dc8-qw-eJb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
@@ -571,6 +602,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="nTs-w3-ZkB" id="0bz-qn-Nbk"/>
+                                            <outlet property="favouriteButton" destination="MSb-Z0-yaa" id="QDo-8W-yt0"/>
                                             <outlet property="titleLabel" destination="Z5M-dh-aTZ" id="jEi-pV-d89"/>
                                             <segue destination="7YQ-lO-BiC" kind="show" identifier="viewBusStopDetails" id="ENF-Ic-7O0"/>
                                         </connections>
@@ -693,13 +725,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkF-IY-IiD">
                                         <rect key="frame" x="3" y="0.0" width="42" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URX-cC-bB3">
                                         <rect key="frame" x="0.0" y="24" width="47" height="24"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -804,20 +836,20 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Providing a better commuting experience by providing real-time bus tracking, arrival and updates about transport" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amW-Sg-3cQ">
                                 <rect key="frame" x="20" y="388" width="374" height="63"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nanyang Polytechnic is a polytechnic located in the precient of Yio Chu Kang in the town of Ang Mo Kio, Singapore." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5t-A8-HCb">
                                 <rect key="frame" x="20" y="471" width="374" height="34"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZ3-eP-8bu">
                                 <rect key="frame" x="20" y="525" width="374" height="67"/>
                                 <string key="text">As an industry-oriented alternative to a broder based high school education, polytechnic graduates in Singapore are sought after for work or many continue to complete university degrees.</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbv-gm-v6C">
@@ -825,7 +857,7 @@
                                 <string key="text">Developed by Abdul Siddiq
 © Copyright 2018 Nanyang Polytechnic</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1091,7 +1123,7 @@ Singapore 569830</string>
         <image name="ic_marker_bus" width="400" height="401"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y2H-fk-N8Y"/>
         <segue reference="IJ2-Pc-QxL"/>
+        <segue reference="y2H-fk-N8Y"/>
     </inferredMetricsTieBreakers>
 </document>
