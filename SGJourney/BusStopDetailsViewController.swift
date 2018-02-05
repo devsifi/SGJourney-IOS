@@ -55,11 +55,7 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func refresh() {
-        let headers = [
-            "AccountKey": Config.DataMallAPI.key
-        ]
-        
-        Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/arrival?id=\(busStopCode)", headers: headers)
+        Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/arrival?id=\(busStopCode)")
             .responseJSON(completionHandler: { (req, resp, result) -> Void in
                 if(result.isSuccess) {
                     let json = JSON(result.value!)
