@@ -21,31 +21,21 @@ PODS:
     - FontAwesomeKit/Core
   - FontAwesomeKit/Zocial (2.2.1):
     - FontAwesomeKit/Core
-  - SlideMenuControllerSwift (2.0.6)
+  - IQKeyboardManagerSwift (4.0.0)
   - SwiftyJSON (2.4.0)
 
 DEPENDENCIES:
   - Alamofire (~> 2.0)
   - FontAwesomeKit (~> 2.2.0)
-  - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift2.1`)
+  - IQKeyboardManagerSwift (= 4.0.0)
   - SwiftyJSON (~> 2.0)
-
-EXTERNAL SOURCES:
-  SlideMenuControllerSwift:
-    :branch: swift2.1
-    :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
-
-CHECKOUT OPTIONS:
-  SlideMenuControllerSwift:
-    :commit: 7b0196dd2a5246049106e5815d2ad896abb83372
-    :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
 
 SPEC CHECKSUMS:
   Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
   FontAwesomeKit: 3614979b3dbb0ec3f7fac1bd760b91f66c31db67
-  SlideMenuControllerSwift: 143343f05b79aef3e2bb4dc72a1dc373ffa66d6c
+  IQKeyboardManagerSwift: ede2a27b4e1ce053d03073b9c7fa439322f5e405
   SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
 
-PODFILE CHECKSUM: f1c3a9eea1c72f6cf9829a8b6060c7e72f8d415b
+PODFILE CHECKSUM: acc7bad8ac1bf3dc951ca673b939124f853c4ada
 
 COCOAPODS: 1.4.0

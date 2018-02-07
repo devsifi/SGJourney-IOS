@@ -29,7 +29,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func reload() {
-        Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/stops").responseJSON { (req, resp, result) -> Void in
+        Alamofire.request(.GET, Config.SGJourneyAPI() + "/bus/stops").responseJSON { (req, resp, result) -> Void in
             if(result.isSuccess) {
                 let json = JSON(result.value!).arrayValue
                 self.favouriteBusStops.removeAll()
@@ -60,7 +60,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! BusTableViewCell
         let busStop = favouriteBusStops[indexPath.row]
         
-        cell.viewController = self
+        cell.parentViewController = self
         
         cell.busStopCode = busStop["BusStopCode"].stringValue
         cell.busStopTitle = busStop["Description"].stringValue

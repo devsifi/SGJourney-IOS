@@ -26,7 +26,7 @@ class RegisterViewController: UIViewController {
             "name":  nameTextField.text!
         ]
         
-        Alamofire.request(.POST, Config.SGJourneyAPI + "/account/register", parameters: param, encoding: .JSON)
+        Alamofire.request(.POST, Config.SGJourneyAPI() + "/account/register", parameters: param, encoding: .JSON)
             .responseJSON(completionHandler: { (req, resp, result) -> Void in
                 if(result.isSuccess) {
                     let json = JSON(result.value!)
@@ -60,6 +60,11 @@ class RegisterViewController: UIViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             })
+    }
+    
+    @IBAction func onTriggerSecretButton(sender: AnyObject) {
+        print("Opening Developer Menu")
+        performSegueWithIdentifier("openDev", sender: nil)
     }
     
     override func viewDidLoad() {

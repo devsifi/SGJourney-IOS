@@ -39,7 +39,7 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
         busServiceTableView.dataSource = self
         
         let refreshButton = FAKFontAwesome.refreshIconWithSize(24)
-        refreshButton.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkGrayColor())
+        refreshButton.addAttribute(NSForegroundColorAttributeName, value: UIColor.lightGrayColor())
         busStopRefreshButton.setAttributedTitle(refreshButton.attributedString(), forState: .Normal)
         
         updateFavouriteButton()
@@ -55,7 +55,7 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func refresh() {
-        Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/arrival?id=\(busStopCode)")
+        Alamofire.request(.GET, Config.SGJourneyAPI() + "/bus/arrival?id=\(busStopCode)")
             .responseJSON(completionHandler: { (req, resp, result) -> Void in
                 if(result.isSuccess) {
                     let json = JSON(result.value!)
@@ -103,7 +103,7 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
         
         if(BusStopFavourites.contains(busStopCode)) {
             
-            Alamofire.request(.POST, Config.SGJourneyAPI + "/favourites/add", parameters: parameters, encoding: .JSON).responseJSON(completionHandler: { (
+            Alamofire.request(.POST, Config.SGJourneyAPI() + "/favourites/add", parameters: parameters, encoding: .JSON).responseJSON(completionHandler: { (
                 req, resp, result) -> Void in
                 if(!result.isSuccess || !JSON(result.value!)["success"].boolValue) {
                     let alert = UIAlertController(title: "Something went wrong", message: "Unable to add '\(self.busStopTitle)' to favourites!",preferredStyle: .Alert)
@@ -121,7 +121,7 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
             });
             
             } else {
-                Alamofire.request(.POST, Config.SGJourneyAPI + "/favourites/remove", parameters: parameters, encoding: .JSON).responseJSON(completionHandler: { (
+                Alamofire.request(.POST, Config.SGJourneyAPI() + "/favourites/remove", parameters: parameters, encoding: .JSON).responseJSON(completionHandler: { (
                 req, resp, result) -> Void in
                     if(!result.isSuccess || !JSON(result.value!)["success"].boolValue) {
                         let alert = UIAlertController(title: "Something went wrong", message: "Unable to remove '\(self.busStopTitle)' from favourites!",preferredStyle: .Alert)
@@ -155,7 +155,7 @@ class BusStopDetailsViewController: UIViewController, UITableViewDataSource, UIT
         dateFomatter.timeZone = NSTimeZone(name: "UTC")
         dateFomatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         
-        cell.serviceNoLabel?.text = service["ServiceNo"].stringValue
+        cell.serviceNoLabel?.text = service["ServiceNo"].stringValue //+ "A"
         cell.busETA1?.text = getBusArrivalTime(dateFomatter.dateFromString(busArrivalETA1))
         cell.busETA2?.text = getBusArrivalTime(dateFomatter.dateFromString(busArrivalETA2))
         cell.busETA3?.text = getBusArrivalTime(dateFomatter.dateFromString(busArrivalETA3))

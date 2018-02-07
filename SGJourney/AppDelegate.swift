@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = UIColor(hex:"#C8D6AF")
         UITabBar.appearance().tintColor = UIColor.darkGrayColor()
         
-         UINavigationBar.appearance().tintColor = UIColor.darkGrayColor()
+        UINavigationBar.appearance().tintColor = UIColor.darkGrayColor()
+        
+        IQKeyboardManager.sharedManager().enable = true
         
         return true
     }

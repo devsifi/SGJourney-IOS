@@ -26,7 +26,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 "search" : query
             ]
             
-            Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/stops", parameters: parameters).responseJSON(completionHandler: { (req, resp, results) -> Void in
+            Alamofire.request(.GET, Config.SGJourneyAPI() + "/bus/stops", parameters: parameters).responseJSON(completionHandler: { (req, resp, results) -> Void in
                 if(results.isSuccess) {
                     let json = JSON(results.value!).arrayValue
                     self.searchResults.appendContentsOf(json)
@@ -60,7 +60,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! BusTableViewCell
         let busStop = searchResults[indexPath.row]
         
-        cell.viewController = self
+        cell.parentViewController = self
         
         cell.busStopCode = busStop["BusStopCode"].stringValue
         cell.busStopTitle = busStop["Description"].stringValue

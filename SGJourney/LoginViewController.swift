@@ -26,6 +26,11 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onTriggerSecretButton(sender: AnyObject) {
+        print("Opening Developer Menu")
+        performSegueWithIdentifier("openDev", sender: nil)
+    }
+    
     @IBAction func onClickLogin(sender: AnyObject) {
         
         var param: [String: AnyObject] = [
@@ -33,7 +38,7 @@ class LoginViewController: UIViewController {
             "password": passwordTextField.text!
         ]
         
-        Alamofire.request(.POST, Config.SGJourneyAPI + "/account/login", parameters: param, encoding: .JSON)
+        Alamofire.request(.POST, Config.SGJourneyAPI() + "/account/login", parameters: param, encoding: .JSON)
             .responseJSON(completionHandler: { (req, resp, result) -> Void in
                 if(result.isSuccess) {
                     let json = JSON(result.value!)
@@ -50,7 +55,7 @@ class LoginViewController: UIViewController {
                             "token": json["token"].stringValue
                         ]
                         
-                        Alamofire.request(.POST, Config.SGJourneyAPI + "/favourites/get", parameters: param, encoding: .JSON).responseJSON(completionHandler: { (req2, resp2, result2) -> Void in
+                        Alamofire.request(.POST, Config.SGJourneyAPI() + "/favourites/get", parameters: param, encoding: .JSON).responseJSON(completionHandler: { (req2, resp2, result2) -> Void in
                             if(result.isSuccess) {
                                 BusStopFavourites.clear()
                                 let favourites = JSON(result2.value!).arrayValue

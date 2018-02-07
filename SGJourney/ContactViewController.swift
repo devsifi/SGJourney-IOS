@@ -31,7 +31,7 @@ class ContactViewController: UIViewController {
     }
     
     @IBAction func onClickEmail(sender: AnyObject) {
-        if let url = NSURL(string: "mailto:\(email)?subject=[SGJourney] Subject Here&") where UIApplication.sharedApplication().canOpenURL(url) {
+        if let url = NSURL(string: "mailto:\(email)") where UIApplication.sharedApplication().canOpenURL(url) {
             UIApplication.sharedApplication().openURL(url)
         }
     }

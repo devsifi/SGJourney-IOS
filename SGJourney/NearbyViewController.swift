@@ -37,6 +37,10 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         mapRefreshButton.setAttributedTitle(refreshIcon.attributedString(), forState: .Normal)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        nearbyBusStopsTableView.reloadData()
+    }
+    
     @IBAction func onClickMapRefresh(sender: AnyObject) {
         UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
             let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
@@ -59,7 +63,7 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             "longitude" : String(locations.first!.coordinate.longitude.description),
         ]
         
-        Alamofire.request(.GET, Config.SGJourneyAPI2 + "/bus/nearby", parameters: parameters).responseJSON(completionHandler: { (req, resp, result) -> Void in
+        Alamofire.request(.GET, Config.SGJourneyAPI() + "/bus/nearby", parameters: parameters).responseJSON(completionHandler: { (req, resp, result) -> Void in
             self.nearbyBusStops.removeAll()
             if(result.isSuccess) {
                 let json = JSON(result.value!)
@@ -96,7 +100,7 @@ class NearbyViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! BusTableViewCell
         let busStop = nearbyBusStops[indexPath.row]
         
-        cell.viewController = self
+        cell.parentViewController = self
         
         cell.busStopCode = busStop["BusStopCode"].stringValue
         cell.busStopTitle = busStop["Description"].stringValue

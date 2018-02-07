@@ -40,10 +40,16 @@ class MoreViewController: UIViewController {
     }
     
     @IBAction func onClickLogout(sender: AnyObject) {
-        if let bid = NSBundle.mainBundle().bundleIdentifier {
-            NSUserDefaults.standardUserDefaults().removePersistentDomainForName(bid)
-            self.performSegueWithIdentifier("login", sender: nil)
-        }
+//        if let bid = NSBundle.mainBundle().bundleIdentifier {
+//            NSUserDefaults.standardUserDefaults().removePersistentDomainForName(bid)
+//            self.performSegueWithIdentifier("login", sender: nil)
+//        }
+        
+        let preferences = NSUserDefaults.standardUserDefaults()
+        preferences.removeObjectForKey("token")
+        preferences.removeObjectForKey("user")
+        
+        self.performSegueWithIdentifier("login", sender: nil)
     }
 
     /*

@@ -41,7 +41,7 @@ class EditProfileViewController: UIViewController {
             "name": EditNameField.text!,
         ]
         
-        Alamofire.request(.PUT, Config.SGJourneyAPI + "/account/update", parameters: param, encoding: .JSON)
+        Alamofire.request(.PUT, Config.SGJourneyAPI() + "/account/update", parameters: param, encoding: .JSON)
             .responseJSON(completionHandler: { (req, resp, result) -> Void in
                 if(result.isSuccess) {
                     let json = JSON(result.value!)
